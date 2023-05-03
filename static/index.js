@@ -26,20 +26,28 @@ function onMessage(event) {
   var jsonReceived = JSON.parse(event.data);
     
     myText = jsonReceived["V1"];
-    testNumber = jsonReceived["V2"];
-    myBool = jsonReceived["V3"]
+    myBool = jsonReceived["V2"];
+    myCounter = jsonReceived["V3"]
     
-    document.getElementById("myMessage").innerHTML = testNumber;
+    document.getElementById("V1").innerHTML = myText;
+    document.getElementById("V2").innerHTML = myBool;
+    document.getElementById("V3").innerHTML = myCounter;
+    document.getElementById("V4").innerHTML = jsonReceived["V4"];
+    document.getElementById("V5").innerHTML = jsonReceived["V5"];
+    document.getElementById("V6").innerHTML = jsonReceived["V6"];
+    document.getElementById("V7").innerHTML = jsonReceived["V7"];
+    document.getElementById("V8").innerHTML = jsonReceived["V8"];
+    document.getElementById("V9").innerHTML = jsonReceived["V9"];
+    document.getElementById("V10").innerHTML = jsonReceived["V10"];
 
     myText = "From Browser";
     myBool = true;
-    testNumber += testNumber;
+    myCounter++;
 
     //set up JSON message before sending mesage to server
-    testNumber++;
     var jsonSend = {"V1": myText,
-                    "V2": testNumber,
-                    "V3": myBool,
+                    "V2": myBool,
+                    "V3": myCounter,
                     "V4": "",                    
                     "V5": "",
                     "V6": "",
