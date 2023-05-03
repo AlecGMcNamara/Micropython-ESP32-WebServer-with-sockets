@@ -1,14 +1,12 @@
 from microdot_asyncio import Microdot, Response, send_file
 from microdot_utemplate import render_template
 from microdot_asyncio_websocket import with_websocket
-
+import ujson
 import time 
 
 # Initialize MicroDot
 app = Microdot()
 Response.default_content_type = 'text/html'
-
-Counter = 0
 
 # root route
 @app.route('/')
@@ -19,12 +17,20 @@ async def index(request):
 @with_websocket
 async def read_sensor(request, ws):
     while True:
-        global Counter
-        await ws.send(str(Counter))
-        Counter +=1
-        data = await ws.receive()
-        print(data)
-        time.sleep(.1)
+        mydevice = "Video"
+        myBit = False
+        myPie = 3.14
+        jsonSend={
+            "Device":mydevice,
+            "myBit":myBit,
+            "myPie":myPie
+            }
+        await ws.send(ujson.dumps(jsonSend))
+        s = ujson.loads(await ws.receive())
+        print(s["Device"])
+        print(s["myBit"])
+        print(s["myPie"] * 2)
+        time.sleep(5)
         
 # Static CSS/JSS
 @app.route("/static/<path:path>")
