@@ -15,21 +15,35 @@ async def index(request):
 
 @app.route('/ws')
 @with_websocket
-async def read_sensor(request, ws):
+async def wsMessage(request, ws):
     while True:
-        mydevice = "Video"
+        myDevice = "Video"
         myBit = False
         myPie = 3.14
         jsonSend={
-            "Device":mydevice,
-            "myBit":myBit,
-            "myPie":myPie
+            "V1":myDevice,
+            "V2":myBit,
+            "V3":myPie,
+            "V4":"",
+            "V5":"",
+            "V6":"",
+            "V7":"",
+            "V8":"",
+            "V9":"",
+            "V10":""
             }
         await ws.send(ujson.dumps(jsonSend))
         s = ujson.loads(await ws.receive())
-        print(s["Device"])
-        print(s["myBit"])
-        print(s["myPie"] * 2)
+        print(s["V1"])
+        print(s["V2"])
+        print(s["V3"])
+        print(s["V4"])
+        print(s["V5"])
+        print(s["V6"])
+        print(s["V7"])
+        print(s["V8"])
+        print(s["V9"])
+        print(s["V10"])
         time.sleep(5)
         
 # Static CSS/JSS
