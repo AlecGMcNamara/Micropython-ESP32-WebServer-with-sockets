@@ -25,12 +25,9 @@ function onClose(event) {
 function onMessage(event) {
   var jsonReceived = JSON.parse(event.data);
     
-    var myText = "";
-    var myBool = false; 
-    
-    myText = jsonReceived["Device"];
-    testNumber = jsonReceived["myPie"];
-    myBool = jsonReceived["myBit"]
+    myText = jsonReceived["V1"];
+    testNumber = jsonReceived["V2"];
+    myBool = jsonReceived["V3"]
     
     document.getElementById("myMessage").innerHTML = testNumber;
 
@@ -40,9 +37,17 @@ function onMessage(event) {
 
     //set up JSON message before sending mesage to server
     testNumber++;
-    var jsonSend = {"Device": myText,
-                    "myPie": testNumber,
-                    "myBit": myBool};
+    var jsonSend = {"V1": myText,
+                    "V2": testNumber,
+                    "V3": myBool,
+                    "V4": "",                    
+                    "V5": "",
+                    "V6": "",
+                    "V7": "",
+                    "V8": "",
+                    "V9": "",
+                    "V10": ""
+                    };
 
     websocket.send(JSON.stringify(jsonSend));   
 }
