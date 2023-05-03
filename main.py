@@ -7,7 +7,7 @@ import time
 # Initialize MicroDot
 app = Microdot()
 Response.default_content_type = 'text/html'
-myCounter=0
+myCounter=1
 
 # root route
 @app.route('/')
