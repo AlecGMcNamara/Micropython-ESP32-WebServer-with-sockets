@@ -1,4 +1,10 @@
 # Write Up  
+ESP32 Micropython project 
+
+Stripped down version from.... 
 https://www.donskytech.com/using-websocket-in-micropython-a-practical-example/  
-  
-![Featured Image - Using WebSocket in MicroPython - A Practical Example](https://user-images.githubusercontent.com/69466026/220387186-31b15ce8-5893-47ef-b01f-f56d896247f7.jpg)
+.... Thanks for sharing :-)
+
+Serves simple page from ESP32 and then makes socket connection to send and receive basic messages in the background. Ideal template for fast development of IOT devices. Will add JSON messages to easily send / receive variables and IO from ESP32 to browser.
+
+Requires latest MicroPython firmware on ESP32, programmed and uploaded with 'Thonny'
