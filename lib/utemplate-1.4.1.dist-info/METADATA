@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: utemplate
+Version: 1.4.1
+Summary: Very lightweight, memory-efficient, dependency-free template engine (compiles to Python source).
+Home-page: https://github.com/pfalcon/utemplate
+Author: Paul Sokolovsky
+Author-email: pfalcon@users.sourceforge.net
+License: MIT
+
