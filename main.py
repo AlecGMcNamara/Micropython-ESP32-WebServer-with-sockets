@@ -7,6 +7,7 @@ import time
 # Initialize MicroDot
 app = Microdot()
 Response.default_content_type = 'text/html'
+myCounter=0
 
 # root route
 @app.route('/')
@@ -19,11 +20,11 @@ async def wsMessage(request, ws):
     while True:
         myDevice = "Video"
         myBit = False
-        myPie = 3.14
+        global myCounter
         jsonSend={
             "V1":myDevice,
             "V2":myBit,
-            "V3":myPie,
+            "V3":myCounter,
             "V4":"",
             "V5":"",
             "V6":"",
@@ -37,14 +38,8 @@ async def wsMessage(request, ws):
         print(s["V1"])
         print(s["V2"])
         print(s["V3"])
-        print(s["V4"])
-        print(s["V5"])
-        print(s["V6"])
-        print(s["V7"])
-        print(s["V8"])
-        print(s["V9"])
-        print(s["V10"])
-        time.sleep(5)
+        myCounter = s["V3"]
+        time.sleep(1)
         
 # Static CSS/JSS
 @app.route("/static/<path:path>")
