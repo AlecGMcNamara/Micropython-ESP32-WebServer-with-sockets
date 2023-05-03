@@ -21,10 +21,30 @@ function onClose(event) {
   console.log("Closing connection to server..");
   setTimeout(initializeSocket, 2000);
 }
+
 function onMessage(event) {
-  console.log("WebSocket message received:", event.data);
-  document.getElementById("myMessage").innerHTML = event.data;
-  sendMessage("You sent " + event.data)
+  var jsonReceived = JSON.parse(event.data);
+    
+    var myText = "";
+    var myBool = false; 
+    
+    myText = jsonReceived["Device"];
+    testNumber = jsonReceived["myPie"];
+    myBool = jsonReceived["myBit"]
+    
+    document.getElementById("myMessage").innerHTML = testNumber;
+
+    myText = "From Browser";
+    myBool = true;
+    testNumber += testNumber;
+
+    //set up JSON message before sending mesage to server
+    testNumber++;
+    var jsonSend = {"Device": myText,
+                    "myPie": testNumber,
+                    "myBit": myBool};
+
+    websocket.send(JSON.stringify(jsonSend));   
 }
 
 function sendMessage(message) {
