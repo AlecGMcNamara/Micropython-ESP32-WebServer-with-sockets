@@ -20,7 +20,7 @@ async def wsMessage(request, ws):
     while True:
         myDevice = "Video"  #set up test variables
         myBit = False
-        global myCounter
+        global myCounter    #Use static integer
         jsonSend={          #create message
             "V1":myDevice,  #add variables to message
             "V2":myBit,
@@ -45,7 +45,8 @@ async def wsMessage(request, ws):
         print(jsonReceive["V8"])
         print(jsonReceive["V9"])
         print(jsonReceive["V10"])
-        myCounter = s["V3"]         #Save to variable
+        myCounter = jsonReceive["V3"]         #Save to variable
+        myCounter +=1
         time.sleep(1)               #time between messages (1 second) can be 0.1 seconds!
         
 # Static CSS/JSS
