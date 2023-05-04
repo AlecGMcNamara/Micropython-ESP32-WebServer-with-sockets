@@ -33,13 +33,20 @@ async def wsMessage(request, ws):
             "V9":"",
             "V10":""
             }
-        await ws.send(ujson.dumps(jsonSend))
-        s = ujson.loads(await ws.receive())
-        print(s["V1"])
-        print(s["V2"])
-        print(s["V3"])
-        myCounter = s["V3"]
-        time.sleep(1)
+        await ws.send(ujson.dumps(jsonSend))           #send message to browser
+        jsonReceive = ujson.loads(await ws.receive())  #receive message from browser
+        print(jsonReceive["V1"])
+        print(jsonReceive["V2"])
+        print(jsonReceive["V3"])
+        print(jsonReceive["V4"])
+        print(jsonReceive["V5"])
+        print(jsonReceive["V6"])
+        print(jsonReceive["V7"])
+        print(jsonReceive["V8"])
+        print(jsonReceive["V9"])
+        print(jsonReceive["V10"])
+        myCounter = s["V3"]         #Save variable
+        time.sleep(1)               #time between messages (1 second) can be 0.1 seconds!
         
 # Static CSS/JSS
 @app.route("/static/<path:path>")
