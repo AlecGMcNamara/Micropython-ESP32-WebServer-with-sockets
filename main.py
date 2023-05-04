@@ -18,11 +18,11 @@ async def index(request):
 @with_websocket
 async def wsMessage(request, ws):
     while True:
-        myDevice = "Video"
+        myDevice = "Video"  #set up test variables
         myBit = False
         global myCounter
-        jsonSend={
-            "V1":myDevice,
+        jsonSend={          #create message
+            "V1":myDevice,  #add variables to message
             "V2":myBit,
             "V3":myCounter,
             "V4":"",
@@ -33,9 +33,9 @@ async def wsMessage(request, ws):
             "V9":"",
             "V10":""
             }
-        await ws.send(ujson.dumps(jsonSend))           #send message to browser
-        jsonReceive = ujson.loads(await ws.receive())  #receive message from browser
-        print(jsonReceive["V1"])
+        await ws.send(ujson.dumps(jsonSend))           #send serialized message to browser
+        jsonReceive = ujson.loads(await ws.receive())  #receive serialized message from browser
+        print(jsonReceive["V1"])    #log message variables
         print(jsonReceive["V2"])
         print(jsonReceive["V3"])
         print(jsonReceive["V4"])
@@ -45,7 +45,7 @@ async def wsMessage(request, ws):
         print(jsonReceive["V8"])
         print(jsonReceive["V9"])
         print(jsonReceive["V10"])
-        myCounter = s["V3"]         #Save variable
+        myCounter = s["V3"]         #Save to variable
         time.sleep(1)               #time between messages (1 second) can be 0.1 seconds!
         
 # Static CSS/JSS
