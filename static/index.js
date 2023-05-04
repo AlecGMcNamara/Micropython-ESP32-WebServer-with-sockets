@@ -25,11 +25,11 @@ function onClose(event) {
 function onMessage(event) {
   var jsonReceived = JSON.parse(event.data);
     
-    myText = jsonReceived["V1"];
+    myText = jsonReceived["V1"];   //get variables from message
     myBool = jsonReceived["V2"];
     myCounter = jsonReceived["V3"]
     
-    document.getElementById("V1").innerHTML = myText;
+    document.getElementById("V1").innerHTML = myText;     //display variables to webpage
     document.getElementById("V2").innerHTML = myBool;
     document.getElementById("V3").innerHTML = myCounter;
     document.getElementById("V4").innerHTML = jsonReceived["V4"];
@@ -40,12 +40,12 @@ function onMessage(event) {
     document.getElementById("V9").innerHTML = jsonReceived["V9"];
     document.getElementById("V10").innerHTML = jsonReceived["V10"];
 
-    myText = "From Browser";
+    myText = "From Browser";  // create dummy variables
     myBool = true;
     myCounter++;
 
     //set up JSON message before sending mesage to server
-    var jsonSend = {"V1": myText,
+    var jsonSend = {"V1": myText,     // add variables to the message
                     "V2": myBool,
                     "V3": myCounter,
                     "V4": "",                    
@@ -57,7 +57,7 @@ function onMessage(event) {
                     "V10": ""
                     };
 
-    websocket.send(JSON.stringify(jsonSend));   
+    websocket.send(JSON.stringify(jsonSend));   //send serialized message to ESP32
 }
 
 function sendMessage(message) {
