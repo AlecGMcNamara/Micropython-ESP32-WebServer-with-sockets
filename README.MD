@@ -12,10 +12,17 @@ Just edit 'main.py' to define the variables to send to the browser, edit 'index.
 Requires latest MicroPython firmware on ESP32, programmed and uploaded with 'Thonny'
 
 To use:
+
 Clone repository to local folder eg: documents\thonny\WebserMinumum
+
 Open folder in Thonny
+
 Change WiFi settings in Boot.py to your network 
+
 Upload to ESP32 with Thonny
+
 Click small red stop ICON to restart Micropython running on ESP
+
 Note ESP IP address from Thonny log
+
 Open Browser (Chrome works best) go to IP address port 5000  eg 192.168.0.68:5000
