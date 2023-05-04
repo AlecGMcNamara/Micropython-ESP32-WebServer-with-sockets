@@ -29,7 +29,7 @@ function onMessage(event) {
     myBool = jsonReceived["V2"];
     myCounter = jsonReceived["V3"]
     
-    document.getElementById("V1").innerHTML = myText;     //display variables to webpage
+    document.getElementById("V1").innerHTML = myText;     //display variables on webpage
     document.getElementById("V2").innerHTML = myBool;
     document.getElementById("V3").innerHTML = myCounter;
     document.getElementById("V4").innerHTML = jsonReceived["V4"];
