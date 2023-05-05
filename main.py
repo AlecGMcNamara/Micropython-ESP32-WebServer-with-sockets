@@ -35,16 +35,16 @@ async def wsMessage(request, ws):
             }
         await ws.send(ujson.dumps(jsonSend))           #send serialized message to browser
         jsonReceive = ujson.loads(await ws.receive())  #receive serialized message from browser
-        print(jsonReceive["V1"])    #log message variables
-        print(jsonReceive["V2"])
-        print(jsonReceive["V3"])
-        print(jsonReceive["V4"])
-        print(jsonReceive["V5"])
-        print(jsonReceive["V6"])
-        print(jsonReceive["V7"])
-        print(jsonReceive["V8"])
-        print(jsonReceive["V9"])
-        print(jsonReceive["V10"])
+        #print(jsonReceive["V1"])
+        #print(jsonReceive["V2"])
+        #print(jsonReceive["V3"])
+        #print(jsonReceive["V4"])
+        #print(jsonReceive["V5"])
+        #print(jsonReceive["V6"])
+        #print(jsonReceive["V7"])
+        #print(jsonReceive["V8"])
+        #print(jsonReceive["V9"])
+        #print(jsonReceive["V10"])
         myCounter = jsonReceive["V3"]         #Save to variable
         myCounter +=1
         time.sleep(1)               #time between messages (1 second) can be 0.1 seconds!
