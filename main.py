@@ -2,27 +2,21 @@ from microdot_asyncio import Microdot, Response, send_file
 from microdot_utemplate import render_template
 from microdot_asyncio_websocket import with_websocket
 import ujson
-import time 
+import time
+import uasyncio
 
 # Initialize MicroDot
 app = Microdot()
 Response.default_content_type = 'text/html'
-myCounter=1
+myCounter=0
 
-# root route
-@app.route('/')
-async def index(request):
-    return render_template('index.html')
-
-@app.route('/ws')
-@with_websocket
-async def wsMessage(request, ws):
+async def sendM(ws):   #send websocket message to web page
     while True:
-        myDevice = "Video"  #set up test variables
+        myDevice = "Video"
         myBit = False
-        global myCounter    #Use static integer
-        jsonSend={          #create message
-            "V1":myDevice,  #add variables to message
+        global myCounter
+        jsonSend={
+            "V1":myDevice,
             "V2":myBit,
             "V3":myCounter,
             "V4":"",
@@ -33,22 +27,33 @@ async def wsMessage(request, ws):
             "V9":"",
             "V10":""
             }
-        await ws.send(ujson.dumps(jsonSend))           #send serialized message to browser
-        jsonReceive = ujson.loads(await ws.receive())  #receive serialized message from browser
-        #print(jsonReceive["V1"])
-        #print(jsonReceive["V2"])
-        #print(jsonReceive["V3"])
-        #print(jsonReceive["V4"])
-        #print(jsonReceive["V5"])
-        #print(jsonReceive["V6"])
-        #print(jsonReceive["V7"])
-        #print(jsonReceive["V8"])
-        #print(jsonReceive["V9"])
-        #print(jsonReceive["V10"])
-        myCounter = jsonReceive["V3"]         #Save to variable
+        await ws.send(ujson.dumps(jsonSend))
+        await uasyncio.sleep(.1)   #delay between sending messages to Browser
+       
+async def recM(ws):     #receive messages from Browser
+    while True:
+        jsonReceice = ujson.loads(await ws.receive())
+        #print(jsonReceice["V1"])   #print to log
+        #print(jsonReceice["V2"])
+        #print(jsonReceice["V3"])
+        global myCounter
+        myCounter = jsonReceice["V3"]  #save to variable
         myCounter +=1
-        time.sleep(1)               #time between messages (1 second) can be 0.1 seconds!
-        
+
+async def call_tasks(ws):      #Manage tasks 
+    await uasyncio.gather(sendM(ws), recM(ws))
+
+# root route
+@app.route('/')
+async def index(request):
+    return render_template('index.html')
+
+
+@app.route('/ws')
+@with_websocket
+async def wsMessage(request, ws):
+    uasyncio.run(call_tasks(ws))         #start tasks when connection made
+            
 # Static CSS/JSS
 @app.route("/static/<path:path>")
 def static(request, path):
@@ -68,3 +73,4 @@ if __name__ == "__main__":
         app.run()
     except KeyboardInterrupt:
         pass
+
